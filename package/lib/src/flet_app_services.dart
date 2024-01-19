@@ -1,3 +1,4 @@
+import 'package:camera_platform_interface/src/types/camera_description.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
@@ -17,6 +18,7 @@ class FletAppServices extends InheritedWidget {
   final String pageUrl;
   final String assetsDir;
   final FletAppErrorsHandler? errorsHandler;
+  final List<CameraDescription?>? cameras;
   late final FletServer server;
   late final Store<AppState> store;
   final Map<String, GlobalKey> globalKeys = {};
@@ -32,7 +34,8 @@ class FletAppServices extends InheritedWidget {
       this.hideLoadingPage,
       this.controlId,
       this.reconnectIntervalMs,
-      this.reconnectTimeoutMs}) {
+      this.reconnectTimeoutMs,
+      required this.cameras}) {
     store = Store<AppState>(appReducer, initialState: AppState.initial());
     server = FletServer(store, controlInvokeMethods,
         reconnectIntervalMs: reconnectIntervalMs,

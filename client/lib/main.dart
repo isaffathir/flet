@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flet/flet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -65,10 +66,15 @@ void main([List<String>? args]) async {
     };
   }
 
+  // camera
+  WidgetsFlutterBinding.ensureInitialized();
+  List<CameraDescription?> cameras = await availableCameras();
+
   runApp(FletApp(
     title: 'Flet',
     pageUrl: pageUrl,
     assetsDir: assetsDir,
     errorsHandler: errorsHandler,
+    cameras: cameras,
   ));
 }

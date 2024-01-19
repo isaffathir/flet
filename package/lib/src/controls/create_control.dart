@@ -135,8 +135,14 @@ Widget createControl(Control? parent, String id, bool parentDisabled,
       }
 
       // create control widget
-      var widget = createWidget(controlKey, controlView, parent, parentDisabled,
-          nextChild, FletAppServices.of(context).server);
+      var widget = createWidget(
+          controlKey,
+          controlView,
+          parent,
+          parentDisabled,
+          nextChild,
+          FletAppServices.of(context).server,
+          FletAppServices.of(context).cameras);
 
       // no theme defined? return widget!
       if (id == "page" || controlView.control.attrString("theme") == null) {

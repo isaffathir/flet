@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'flet_app_errors_handler.dart';
@@ -10,6 +11,7 @@ class FletApp extends StatefulWidget {
   final bool? hideLoadingPage;
   final String? controlId;
   final String? title;
+  final List<CameraDescription?>? cameras;
   final FletAppErrorsHandler? errorsHandler;
   final int? reconnectIntervalMs;
   final int? reconnectTimeoutMs;
@@ -23,7 +25,9 @@ class FletApp extends StatefulWidget {
       this.title,
       this.errorsHandler,
       this.reconnectIntervalMs,
-      this.reconnectTimeoutMs});
+      this.reconnectTimeoutMs,
+      this.cameras,
+      });
 
   @override
   State<FletApp> createState() => _FletAppState();
@@ -52,6 +56,7 @@ class _FletAppState extends State<FletApp> {
           pageUrl: widget.pageUrl,
           assetsDir: widget.assetsDir,
           errorsHandler: widget.errorsHandler,
+          cameras: widget.cameras,
           child: FletAppMain(title: widget.title ?? "Flet"));
     }
     return _appServices!;
