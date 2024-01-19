@@ -29,7 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  camera: 0.10.5
   flet:
     path: ../package/
 
