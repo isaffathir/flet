@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:camera/camera.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -21,6 +22,7 @@ import 'banner.dart';
 import 'barchart.dart';
 import 'bottom_app_bar.dart';
 import 'bottom_sheet.dart';
+import 'camera.dart';
 import 'canvas.dart';
 import 'card.dart';
 import 'checkbox.dart';
@@ -171,8 +173,14 @@ Widget createControl(Control? parent, String id, bool parentDisabled,
   );
 }
 
-Widget createWidget(Key? key, ControlViewModel controlView, Control? parent,
-    bool parentDisabled, Widget? nextChild, FletServer server) {
+Widget createWidget(
+    Key? key,
+    ControlViewModel controlView,
+    Control? parent,
+    bool parentDisabled,
+    Widget? nextChild,
+    FletServer server,
+    List<CameraDescription?>? cameras) {
   switch (controlView.control.type) {
     case "page":
       return PageControl(
@@ -231,6 +239,15 @@ Widget createWidget(Key? key, ControlViewModel controlView, Control? parent,
         control: controlView.control,
         children: controlView.children,
         parentDisabled: parentDisabled,
+      );
+    case "camera":
+      return CameraControl(
+        key: key,
+        parent: parent,
+        control: controlView.control,
+        children: controlView.children,
+        parentDisabled: parentDisabled,
+        cameras: cameras,
       );
     case "clipboard":
       return ClipboardControl(
